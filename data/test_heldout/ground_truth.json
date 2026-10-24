@@ -1,0 +1,638 @@
+[
+  {
+    "file": "med_01_easy.png",
+    "category": "med",
+    "level": "easy",
+    "lines": [
+      "FEVRANOL",
+      "Paracetamol 500 mg",
+      "10 Tablet",
+      "Aturan pakai: 3 x sehari 1 tablet",
+      "Diminum sesudah makan",
+      "Reg. No. DBL4797265611A1",
+      "Batch: B86K89",
+      "Exp. Date: 06/2025"
+    ],
+    "expiry": "2025-06-30",
+    "product_name": "FEVRANOL",
+    "dark_background": false
+  },
+  {
+    "file": "med_01_medium.png",
+    "category": "med",
+    "level": "medium",
+    "lines": [
+      "FEVRANOL",
+      "Paracetamol 500 mg",
+      "10 Tablet",
+      "Aturan pakai: 3 x sehari 1 tablet",
+      "Diminum sesudah makan",
+      "Reg. No. DBL4797265611A1",
+      "Batch: B86K89",
+      "Exp. Date: 06/2025"
+    ],
+    "expiry": "2025-06-30",
+    "product_name": "FEVRANOL",
+    "dark_background": false
+  },
+  {
+    "file": "med_01_hard.png",
+    "category": "med",
+    "level": "hard",
+    "lines": [
+      "FEVRANOL",
+      "Paracetamol 500 mg",
+      "10 Tablet",
+      "Aturan pakai: 3 x sehari 1 tablet",
+      "Diminum sesudah makan",
+      "Reg. No. DBL4797265611A1",
+      "Batch: B86K89",
+      "Exp. Date: 06/2025"
+    ],
+    "expiry": "2025-06-30",
+    "product_name": "FEVRANOL",
+    "dark_background": false
+  },
+  {
+    "file": "med_02_easy.png",
+    "category": "med",
+    "level": "easy",
+    "lines": [
+      "TUSOLIN",
+      "Dekstrometorfan HBr 15 mg/5 ml",
+      "Sirup 60 ml",
+      "Dewasa: 3 x sehari 2 sendok takar",
+      "Anak 6-12 tahun: 3 x sehari 1 sendok takar",
+      "Reg. No. DBL7814055142A1",
+      "Batch: B40K10",
+      "Kedaluwarsa: 18/10/2028"
+    ],
+    "expiry": "2028-10-18",
+    "product_name": "TUSOLIN",
+    "dark_background": false
+  },
+  {
+    "file": "med_02_medium.png",
+    "category": "med",
+    "level": "medium",
+    "lines": [
+      "TUSOLIN",
+      "Dekstrometorfan HBr 15 mg/5 ml",
+      "Sirup 60 ml",
+      "Dewasa: 3 x sehari 2 sendok takar",
+      "Anak 6-12 tahun: 3 x sehari 1 sendok takar",
+      "Reg. No. DBL7814055142A1",
+      "Batch: B40K10",
+      "Kedaluwarsa: 18/10/2028"
+    ],
+    "expiry": "2028-10-18",
+    "product_name": "TUSOLIN",
+    "dark_background": false
+  },
+  {
+    "file": "med_02_hard.png",
+    "category": "med",
+    "level": "hard",
+    "lines": [
+      "TUSOLIN",
+      "Dekstrometorfan HBr 15 mg/5 ml",
+      "Sirup 60 ml",
+      "Dewasa: 3 x sehari 2 sendok takar",
+      "Anak 6-12 tahun: 3 x sehari 1 sendok takar",
+      "Reg. No. DBL7814055142A1",
+      "Batch: B40K10",
+      "Kedaluwarsa: 18/10/2028"
+    ],
+    "expiry": "2028-10-18",
+    "product_name": "TUSOLIN",
+    "dark_background": false
+  },
+  {
+    "file": "med_03_easy.png",
+    "category": "med",
+    "level": "easy",
+    "lines": [
+      "AMOXIVA",
+      "Amoxicillin 500 mg",
+      "10 Kapsul",
+      "Aturan pakai: 3 x sehari 1 kapsul",
+      "Habiskan sesuai resep dokter",
+      "Reg. No. DBL2931252818A1",
+      "Batch: B97K72",
+      "Exp. Date: 10 FEB 2025"
+    ],
+    "expiry": "2025-02-10",
+    "product_name": "AMOXIVA",
+    "dark_background": false
+  },
+  {
+    "file": "med_03_medium.png",
+    "category": "med",
+    "level": "medium",
+    "lines": [
+      "AMOXIVA",
+      "Amoxicillin 500 mg",
+      "10 Kapsul",
+      "Aturan pakai: 3 x sehari 1 kapsul",
+      "Habiskan sesuai resep dokter",
+      "Reg. No. DBL2931252818A1",
+      "Batch: B97K72",
+      "Exp. Date: 10 FEB 2025"
+    ],
+    "expiry": "2025-02-10",
+    "product_name": "AMOXIVA",
+    "dark_background": false
+  },
+  {
+    "file": "med_03_hard.png",
+    "category": "med",
+    "level": "hard",
+    "lines": [
+      "AMOXIVA",
+      "Amoxicillin 500 mg",
+      "10 Kapsul",
+      "Aturan pakai: 3 x sehari 1 kapsul",
+      "Habiskan sesuai resep dokter",
+      "Reg. No. DBL2931252818A1",
+      "Batch: B97K72",
+      "Exp. Date: 10 FEB 2025"
+    ],
+    "expiry": "2025-02-10",
+    "product_name": "AMOXIVA",
+    "dark_background": false
+  },
+  {
+    "file": "med_04_easy.png",
+    "category": "med",
+    "level": "easy",
+    "lines": [
+      "CETRIZA",
+      "Cetirizine 10 mg",
+      "10 Tablet",
+      "Dosis: 1 x sehari 1 tablet",
+      "Dapat menyebabkan kantuk",
+      "Reg. No. DBL3738975628A1",
+      "Batch: B53K21",
+      "ED: APR 2027"
+    ],
+    "expiry": "2027-04-30",
+    "product_name": "CETRIZA",
+    "dark_background": false
+  },
+  {
+    "file": "med_04_medium.png",
+    "category": "med",
+    "level": "medium",
+    "lines": [
+      "CETRIZA",
+      "Cetirizine 10 mg",
+      "10 Tablet",
+      "Dosis: 1 x sehari 1 tablet",
+      "Dapat menyebabkan kantuk",
+      "Reg. No. DBL3738975628A1",
+      "Batch: B53K21",
+      "ED: APR 2027"
+    ],
+    "expiry": "2027-04-30",
+    "product_name": "CETRIZA",
+    "dark_background": false
+  },
+  {
+    "file": "med_04_hard.png",
+    "category": "med",
+    "level": "hard",
+    "lines": [
+      "CETRIZA",
+      "Cetirizine 10 mg",
+      "10 Tablet",
+      "Dosis: 1 x sehari 1 tablet",
+      "Dapat menyebabkan kantuk",
+      "Reg. No. DBL3738975628A1",
+      "Batch: B53K21",
+      "ED: APR 2027"
+    ],
+    "expiry": "2027-04-30",
+    "product_name": "CETRIZA",
+    "dark_background": false
+  },
+  {
+    "file": "med_05_easy.png",
+    "category": "med",
+    "level": "easy",
+    "lines": [
+      "MAGASOL",
+      "Antasida Doen",
+      "Tablet Kunyah 20",
+      "Aturan pakai: 3 x sehari 1-2 tablet",
+      "Dikunyah 1 jam sebelum makan",
+      "Reg. No. DBL7774981744A1",
+      "Batch: B13K57",
+      "EXP: 05/2027"
+    ],
+    "expiry": "2027-05-31",
+    "product_name": "MAGASOL",
+    "dark_background": true
+  },
+  {
+    "file": "med_05_medium.png",
+    "category": "med",
+    "level": "medium",
+    "lines": [
+      "MAGASOL",
+      "Antasida Doen",
+      "Tablet Kunyah 20",
+      "Aturan pakai: 3 x sehari 1-2 tablet",
+      "Dikunyah 1 jam sebelum makan",
+      "Reg. No. DBL7774981744A1",
+      "Batch: B13K57",
+      "EXP: 05/2027"
+    ],
+    "expiry": "2027-05-31",
+    "product_name": "MAGASOL",
+    "dark_background": true
+  },
+  {
+    "file": "med_05_hard.png",
+    "category": "med",
+    "level": "hard",
+    "lines": [
+      "MAGASOL",
+      "Antasida Doen",
+      "Tablet Kunyah 20",
+      "Aturan pakai: 3 x sehari 1-2 tablet",
+      "Dikunyah 1 jam sebelum makan",
+      "Reg. No. DBL7774981744A1",
+      "Batch: B13K57",
+      "EXP: 05/2027"
+    ],
+    "expiry": "2027-05-31",
+    "product_name": "MAGASOL",
+    "dark_background": true
+  },
+  {
+    "file": "med_06_easy.png",
+    "category": "med",
+    "level": "easy",
+    "lines": [
+      "VITACIX",
+      "Vitamin C 1000 mg",
+      "10 Tablet Effervescent",
+      "Dosis: 1 x sehari 1 tablet",
+      "Larutkan dalam 200 ml air",
+      "Reg. No. DBL5795107404A1",
+      "Batch: B74K86",
+      "Exp. Date: 14/08/2027"
+    ],
+    "expiry": "2027-08-14",
+    "product_name": "VITACIX",
+    "dark_background": false
+  },
+  {
+    "file": "med_06_medium.png",
+    "category": "med",
+    "level": "medium",
+    "lines": [
+      "VITACIX",
+      "Vitamin C 1000 mg",
+      "10 Tablet Effervescent",
+      "Dosis: 1 x sehari 1 tablet",
+      "Larutkan dalam 200 ml air",
+      "Reg. No. DBL5795107404A1",
+      "Batch: B74K86",
+      "Exp. Date: 14/08/2027"
+    ],
+    "expiry": "2027-08-14",
+    "product_name": "VITACIX",
+    "dark_background": false
+  },
+  {
+    "file": "med_06_hard.png",
+    "category": "med",
+    "level": "hard",
+    "lines": [
+      "VITACIX",
+      "Vitamin C 1000 mg",
+      "10 Tablet Effervescent",
+      "Dosis: 1 x sehari 1 tablet",
+      "Larutkan dalam 200 ml air",
+      "Reg. No. DBL5795107404A1",
+      "Batch: B74K86",
+      "Exp. Date: 14/08/2027"
+    ],
+    "expiry": "2027-08-14",
+    "product_name": "VITACIX",
+    "dark_background": false
+  },
+  {
+    "file": "med_07_easy.png",
+    "category": "med",
+    "level": "easy",
+    "lines": [
+      "IBUFEN",
+      "Ibuprofen 400 mg",
+      "10 Kaplet",
+      "Aturan pakai: 3 x sehari 1 kaplet",
+      "Diminum sesudah makan",
+      "Reg. No. DBL8921971441A1",
+      "Batch: B82K71",
+      "ED: 17 JUL 2028"
+    ],
+    "expiry": "2028-07-17",
+    "product_name": "IBUFEN",
+    "dark_background": false
+  },
+  {
+    "file": "med_07_medium.png",
+    "category": "med",
+    "level": "medium",
+    "lines": [
+      "IBUFEN",
+      "Ibuprofen 400 mg",
+      "10 Kaplet",
+      "Aturan pakai: 3 x sehari 1 kaplet",
+      "Diminum sesudah makan",
+      "Reg. No. DBL8921971441A1",
+      "Batch: B82K71",
+      "ED: 17 JUL 2028"
+    ],
+    "expiry": "2028-07-17",
+    "product_name": "IBUFEN",
+    "dark_background": false
+  },
+  {
+    "file": "med_07_hard.png",
+    "category": "med",
+    "level": "hard",
+    "lines": [
+      "IBUFEN",
+      "Ibuprofen 400 mg",
+      "10 Kaplet",
+      "Aturan pakai: 3 x sehari 1 kaplet",
+      "Diminum sesudah makan",
+      "Reg. No. DBL8921971441A1",
+      "Batch: B82K71",
+      "ED: 17 JUL 2028"
+    ],
+    "expiry": "2028-07-17",
+    "product_name": "IBUFEN",
+    "dark_background": false
+  },
+  {
+    "file": "med_08_easy.png",
+    "category": "med",
+    "level": "easy",
+    "lines": [
+      "LORADIN",
+      "Loratadine 10 mg",
+      "10 Tablet",
+      "Dewasa: 1 x sehari 1 tablet",
+      "Simpan di bawah suhu 30 C",
+      "Reg. No. DBL4513851069A1",
+      "Batch: B76K95",
+      "EXP: OKT 2025"
+    ],
+    "expiry": "2025-10-31",
+    "product_name": "LORADIN",
+    "dark_background": false
+  },
+  {
+    "file": "med_08_medium.png",
+    "category": "med",
+    "level": "medium",
+    "lines": [
+      "LORADIN",
+      "Loratadine 10 mg",
+      "10 Tablet",
+      "Dewasa: 1 x sehari 1 tablet",
+      "Simpan di bawah suhu 30 C",
+      "Reg. No. DBL4513851069A1",
+      "Batch: B76K95",
+      "EXP: OKT 2025"
+    ],
+    "expiry": "2025-10-31",
+    "product_name": "LORADIN",
+    "dark_background": false
+  },
+  {
+    "file": "med_08_hard.png",
+    "category": "med",
+    "level": "hard",
+    "lines": [
+      "LORADIN",
+      "Loratadine 10 mg",
+      "10 Tablet",
+      "Dewasa: 1 x sehari 1 tablet",
+      "Simpan di bawah suhu 30 C",
+      "Reg. No. DBL4513851069A1",
+      "Batch: B76K95",
+      "EXP: OKT 2025"
+    ],
+    "expiry": "2025-10-31",
+    "product_name": "LORADIN",
+    "dark_background": false
+  },
+  {
+    "file": "food_09_easy.png",
+    "category": "food",
+    "level": "easy",
+    "lines": [
+      "KERIPIK SINGKONG",
+      "Rasa Balado Pedas",
+      "Berat Bersih: 75 g",
+      "Komposisi: singkong, minyak nabati, garam, cabai",
+      "Mengandung alergen: kacang",
+      "BPOM RI MD 256637630484",
+      "Best Before: 20 DES 2025"
+    ],
+    "expiry": "2025-12-20",
+    "product_name": "KERIPIK SINGKONG",
+    "dark_background": false
+  },
+  {
+    "file": "food_09_medium.png",
+    "category": "food",
+    "level": "medium",
+    "lines": [
+      "KERIPIK SINGKONG",
+      "Rasa Balado Pedas",
+      "Berat Bersih: 75 g",
+      "Komposisi: singkong, minyak nabati, garam, cabai",
+      "Mengandung alergen: kacang",
+      "BPOM RI MD 256637630484",
+      "Best Before: 20 DES 2025"
+    ],
+    "expiry": "2025-12-20",
+    "product_name": "KERIPIK SINGKONG",
+    "dark_background": false
+  },
+  {
+    "file": "food_09_hard.png",
+    "category": "food",
+    "level": "hard",
+    "lines": [
+      "KERIPIK SINGKONG",
+      "Rasa Balado Pedas",
+      "Berat Bersih: 75 g",
+      "Komposisi: singkong, minyak nabati, garam, cabai",
+      "Mengandung alergen: kacang",
+      "BPOM RI MD 256637630484",
+      "Best Before: 20 DES 2025"
+    ],
+    "expiry": "2025-12-20",
+    "product_name": "KERIPIK SINGKONG",
+    "dark_background": false
+  },
+  {
+    "file": "food_10_easy.png",
+    "category": "food",
+    "level": "easy",
+    "lines": [
+      "SUSU UHT COKELAT",
+      "Minuman Susu Steril",
+      "Isi Bersih: 200 ml",
+      "Komposisi: susu sapi segar, gula, kakao",
+      "Simpan di tempat sejuk dan kering",
+      "BPOM RI MD 871490675305",
+      "Baik digunakan sebelum: APR 2028"
+    ],
+    "expiry": "2028-04-30",
+    "product_name": "SUSU UHT COKELAT",
+    "dark_background": false
+  },
+  {
+    "file": "food_10_medium.png",
+    "category": "food",
+    "level": "medium",
+    "lines": [
+      "SUSU UHT COKELAT",
+      "Minuman Susu Steril",
+      "Isi Bersih: 200 ml",
+      "Komposisi: susu sapi segar, gula, kakao",
+      "Simpan di tempat sejuk dan kering",
+      "BPOM RI MD 871490675305",
+      "Baik digunakan sebelum: APR 2028"
+    ],
+    "expiry": "2028-04-30",
+    "product_name": "SUSU UHT COKELAT",
+    "dark_background": false
+  },
+  {
+    "file": "food_10_hard.png",
+    "category": "food",
+    "level": "hard",
+    "lines": [
+      "SUSU UHT COKELAT",
+      "Minuman Susu Steril",
+      "Isi Bersih: 200 ml",
+      "Komposisi: susu sapi segar, gula, kakao",
+      "Simpan di tempat sejuk dan kering",
+      "BPOM RI MD 871490675305",
+      "Baik digunakan sebelum: APR 2028"
+    ],
+    "expiry": "2028-04-30",
+    "product_name": "SUSU UHT COKELAT",
+    "dark_background": false
+  },
+  {
+    "file": "food_11_easy.png",
+    "category": "food",
+    "level": "easy",
+    "lines": [
+      "MIE GORENG SPESIAL",
+      "Rasa Ayam Bawang",
+      "Berat Bersih: 85 g",
+      "Masak dalam 400 ml air selama 3 menit",
+      "Mengandung gandum dan kedelai",
+      "BPOM RI MD 377221379686",
+      "EXP: 11/2028"
+    ],
+    "expiry": "2028-11-30",
+    "product_name": "MIE GORENG SPESIAL",
+    "dark_background": true
+  },
+  {
+    "file": "food_11_medium.png",
+    "category": "food",
+    "level": "medium",
+    "lines": [
+      "MIE GORENG SPESIAL",
+      "Rasa Ayam Bawang",
+      "Berat Bersih: 85 g",
+      "Masak dalam 400 ml air selama 3 menit",
+      "Mengandung gandum dan kedelai",
+      "BPOM RI MD 377221379686",
+      "EXP: 11/2028"
+    ],
+    "expiry": "2028-11-30",
+    "product_name": "MIE GORENG SPESIAL",
+    "dark_background": true
+  },
+  {
+    "file": "food_11_hard.png",
+    "category": "food",
+    "level": "hard",
+    "lines": [
+      "MIE GORENG SPESIAL",
+      "Rasa Ayam Bawang",
+      "Berat Bersih: 85 g",
+      "Masak dalam 400 ml air selama 3 menit",
+      "Mengandung gandum dan kedelai",
+      "BPOM RI MD 377221379686",
+      "EXP: 11/2028"
+    ],
+    "expiry": "2028-11-30",
+    "product_name": "MIE GORENG SPESIAL",
+    "dark_background": true
+  },
+  {
+    "file": "food_12_easy.png",
+    "category": "food",
+    "level": "easy",
+    "lines": [
+      "BISKUIT GANDUM",
+      "Tinggi Serat",
+      "Berat Bersih: 120 g",
+      "Komposisi: tepung gandum, gula, mentega",
+      "Mengandung susu dan telur",
+      "BPOM RI MD 812104727276",
+      "EXP: 10/11/2028"
+    ],
+    "expiry": "2028-11-10",
+    "product_name": "BISKUIT GANDUM",
+    "dark_background": false
+  },
+  {
+    "file": "food_12_medium.png",
+    "category": "food",
+    "level": "medium",
+    "lines": [
+      "BISKUIT GANDUM",
+      "Tinggi Serat",
+      "Berat Bersih: 120 g",
+      "Komposisi: tepung gandum, gula, mentega",
+      "Mengandung susu dan telur",
+      "BPOM RI MD 812104727276",
+      "EXP: 10/11/2028"
+    ],
+    "expiry": "2028-11-10",
+    "product_name": "BISKUIT GANDUM",
+    "dark_background": false
+  },
+  {
+    "file": "food_12_hard.png",
+    "category": "food",
+    "level": "hard",
+    "lines": [
+      "BISKUIT GANDUM",
+      "Tinggi Serat",
+      "Berat Bersih: 120 g",
+      "Komposisi: tepung gandum, gula, mentega",
+      "Mengandung susu dan telur",
+      "BPOM RI MD 812104727276",
+      "EXP: 10/11/2028"
+    ],
+    "expiry": "2028-11-10",
+    "product_name": "BISKUIT GANDUM",
+    "dark_background": false
+  }
+]

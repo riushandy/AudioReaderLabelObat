@@ -1,0 +1,8 @@
+opencv-python>=4.8
+numpy>=1.24
+pytesseract>=0.3.10
+pyttsx3>=2.90
+gTTS>=2.5          # opsional: TTS online (suara Bahasa Indonesia lebih natural)
+rapidfuzz>=3.0     # untuk evaluasi (CER/WER)
+Pillow>=10.0       # untuk generator dataset sintetis
+matplotlib>=3.7    # untuk grafik hasil evaluasi
