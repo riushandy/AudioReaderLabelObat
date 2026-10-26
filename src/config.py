@@ -53,7 +53,7 @@ class CameraConfig:
     width: int = 1920                   # resolusi permintaan ke webcam (fallback otomatis bila tak didukung)
     height: int = 1080
     analysis_width: int = 1280          # lebar frame untuk analisis teks (640 terlalu kecil: blok teks hilang)
-    sharpness_threshold: float = 60.0   # varians Laplacian area tengah (dinormalisasi lebar 640 px)
+    sharpness_threshold: float = 90.0   # varians Laplacian area tengah (dinormalisasi lebar 640 px)
     stable_frames: int = 10             # jumlah frame siap berturut-turut sebelum auto-capture
     motion_threshold: float = 6.0       # selisih rata-rata antar frame (gambar 160x90)
     min_text_boxes: int = 3             # minimal blok teks agar auto-capture
@@ -64,7 +64,7 @@ class CameraConfig:
     ring_size: int = 8                  # jumlah frame terakhir yang disimpan untuk memilih yang tertajam
     force_after_s: float = 8.0          # bila hanya 'buram'/'jauh' selama ini, tetap baca (agar tidak menunggu selamanya)
     max_extra_frames: int = 2           # frame tambahan dibaca bila tanggal belum yakin
-
+    bright_threshold: float = 175.0     # rata-rata intensitas area tengah di atas ini = terlalu terang
 
 @dataclass
 class AppConfig:

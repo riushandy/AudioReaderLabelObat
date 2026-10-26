@@ -52,10 +52,12 @@ class Speaker:
             print(f"[TTS] audio disimpan di {path} (pasang 'playsound' untuk memutar otomatis)")
 
     def _worker(self):
-        eng = None
+        # pyttsx3: buat engine BARU untuk tiap ucapan. Memakai satu engine untuk
+        # runAndWait() berulang di thread membuat suara hanya keluar sekali
+        # (bug umum SAPI5/Windows dan NSSpeech/macOS).
         if self.engine_name == "pyttsx3":
             try:
-                eng = self._init_pyttsx3()
+                self._init_pyttsx3().stop()
             except Exception as e:
                 print(f"[TTS] pyttsx3 tidak tersedia ({e}); hanya mencetak teks.")
                 self.engine_name = "print"
@@ -65,9 +67,12 @@ class Speaker:
                 break
             self._busy.set()
             try:
-                if self.engine_name == "pyttsx3" and eng is not None:
+                if self.engine_name == "pyttsx3":
+                    eng = self._init_pyttsx3()
                     eng.say(text)
                     eng.runAndWait()
+                    eng.stop()
+                    del eng
                 elif self.engine_name == "gtts":
                     self._speak_gtts(text)
             except Exception as e:

@@ -114,6 +114,8 @@ def analyse(frame: np.ndarray, prev_small: np.ndarray | None,
         hint = "Cahaya terlalu gelap. Pindah ke tempat yang lebih terang."; kind = "dark"
     elif glare > cam.glare_frac:
         hint = "Terlalu silau. Miringkan kemasan sedikit."; kind = "glare"
+    elif bright > cam.bright_threshold:
+        hint = "Terlalu terang. Jauhi jendela atau lampu di belakang."; kind = "bright"
     elif len(boxes) < cam.min_text_boxes:
         hint = "Teks belum terdeteksi. Arahkan sisi kemasan yang bertulisan ke kamera."; kind = "notext"
     elif frac < cam.min_cluster_frac:
