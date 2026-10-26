@@ -12,6 +12,7 @@ from .config import AppConfig
 from .info_extractor import ProductInfo, build_speech, extract_info
 from .ocr_engine import OCROutput, ocr_rois
 from .preprocessing import preprocess
+from .verify import fix_units, fuzzy_words, verify_expiry
 from .text_localization import localize_text
 
 
@@ -50,10 +51,54 @@ class TextReaderPipeline:
 
         t3 = time.perf_counter()
         info = extract_info(ocr.lines, today)
-        speech = build_speech(info, ocr.text, mode)
         t["extraction"] = time.perf_counter() - t3
+        t4 = time.perf_counter()
+        if self.cfg.ocr.verify_expiry:
+            verify_expiry(stages["enhanced"], ocr, info, self.cfg.ocr, self.cfg.loc.pad)
+        info.netto = fix_units(info.netto)
+        info.dosage = [fuzzy_words(fix_units(d)) for d in info.dosage]
+        t["verify"] = time.perf_counter() - t4
+        t3 = time.perf_counter()
+        speech = build_speech(info, ocr.text, mode)
+        t["extraction"] += time.perf_counter() - t3
         t["total"] = time.perf_counter() - t0
         return PipelineResult(stages, loc["boxes"], ocr, info, speech, t)
+
+    def process_frames(self, frames: list, today: date | None = None, mode: str = "ringkas",
+                       log=None) -> PipelineResult:
+        """Baca frame terbaik dulu; bila tanggal belum yakin, baca frame tambahan dan voting."""
+        results = [self.process(frames[0], today, mode)]
+        for f in frames[1:]:
+            r0 = results[0]
+            if r0.info.expiry_date is not None and r0.info.expiry_confident:
+                break
+            if log:
+                log("Tanggal belum jelas, memeriksa ulang.")
+            results.append(self.process(f, today, mode))
+            if results[-1].info.expiry_date is not None and results[-1].info.expiry_confident:
+                break
+        best = _pick(results, mode)
+        best.timings = dict(best.timings, total=sum(r.timings["total"] for r in results), frames=len(results))
+        return best
+
+
+def _pick(results: list, mode: str):
+    """Pilih hasil terbaik dari beberapa frame. Prioritas: tanggal yakin; lalu
+    tanggal yang disepakati >= 2 frame; lalu hasil pertama."""
+    from collections import Counter
+    for r in results:
+        if r.info.expiry_date is not None and r.info.expiry_confident:
+            return r
+    dates = [r.info.expiry_date for r in results if r.info.expiry_date is not None]
+    if dates:
+        d, n = Counter(dates).most_common(1)[0]
+        if n >= 2:
+            r = next(x for x in results if x.info.expiry_date == d)
+            r.info.expiry_confident = True        # disepakati antar-frame
+            r.speech = build_speech(r.info, r.ocr.text, mode)
+            return r
+        return next(x for x in results if x.info.expiry_date is not None)
+    return results[0]
 
 
 def draw_boxes(img: np.ndarray, boxes, color=(0, 200, 0)) -> np.ndarray:

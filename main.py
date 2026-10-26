@@ -21,9 +21,10 @@ import cv2
 import numpy as np
 
 from src.config import AppConfig
+from src.camera import FrameRing, analyse, open_camera
 from src.pipeline import TextReaderPipeline, draw_boxes, stage_montage
-from src.preprocessing import resize_to_width, sharpness
-from src.text_localization import localize_text
+from src.preprocessing import resize_to_width
+from src.text_localization import TextBox
 from src.tts import Speaker, save_speech
 
 
@@ -34,12 +35,13 @@ def print_result(res):
     i = res.info
     print(f"Nama produk  : {i.product_name}")
     print(f"Kandungan    : {', '.join(i.strengths)}")
-    print(f"Kedaluwarsa  : {i.expiry_date} (raw='{i.expiry_raw}', sisa hari={i.days_left})")
+    print(f"Kedaluwarsa  : {i.expiry_date} (raw='{i.expiry_raw}', sisa hari={i.days_left}, "
+          f"{'YAKIN' if i.expiry_confident else 'TIDAK YAKIN - ucapkan kurang jelas'})")
     print(f"Aturan pakai : {' | '.join(i.dosage)}")
     print(f"No. Reg      : {i.registration}")
     print(f"Netto        : {i.netto}")
     print("========== WAKTU (detik) ==========")
-    print("  ".join(f"{k}={v:.3f}" for k, v in res.timings.items()))
+    print("  ".join(f"{k}={v:.3f}" if k != "frames" else f"frames={int(v)}" for k, v in res.timings.items()))
     print(f"\n[UCAPAN] {res.speech}\n")
 
 
@@ -86,6 +88,7 @@ class CameraReader:
         self.stable = 0
         self.prev_small = None
         self.cooldown_until = 0.0
+        self.soft_since = None            # sejak kapan hanya 'buram'/'jauh' yang menghalangi
 
     def guide(self, msg: str):
         now = time.time()
@@ -93,10 +96,11 @@ class CameraReader:
             self.spk.say(msg)
             self.last_guidance = now
 
-    def _process_async(self, frame):
+    def _process_async(self, frames):
         def job():
             try:
-                res = self.pipe.process(frame, mode=self.args.mode)
+                res = self.pipe.process_frames(frames, mode=self.args.mode,
+                                               log=lambda m: self.spk.say(m, interrupt=True))
                 self.last_result = res
                 print_result(res)
                 if res.text.strip():
@@ -110,48 +114,58 @@ class CameraReader:
         self.spk.say("Memproses, mohon tahan.", interrupt=True)
         threading.Thread(target=job, daemon=True).start()
 
+    def _capture(self, ring: FrameRing):
+        self.stable, self.soft_since = 0, None
+        self._process_async([f.copy() for f in ring.best(1 + self.cfg.cam.max_extra_frames)])
+
     def run(self):
-        source = self.args.video if self.args.video else self.args.camera
-        cap = cv2.VideoCapture(source)
-        if self.args.video is None:
-            cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
-            cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+        is_file = bool(self.args.video)
+        source = self.args.video if is_file else self.args.camera
+        cc = self.cfg.cam
+        if self.args.width:
+            cc.width, cc.height = self.args.width, self.args.height or int(self.args.width * 9 / 16)
+        cap = open_camera(source, cc, is_file)
         if not cap.isOpened():
             raise SystemExit(f"Sumber video tidak dapat dibuka: {source}")
+        if not is_file:
+            print(f"[KAMERA] resolusi aktual {int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))}x"
+                  f"{int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))}")
+        ring = FrameRing(cc.ring_size)
         self.spk.say("Pembaca label siap. Arahkan kemasan ke kamera dan tahan stabil.")
-        cc = self.cfg.cam
         while True:
             ok, frame = cap.read()
             if not ok:
                 break
-            small, _ = resize_to_width(frame, 640)
-            gray = cv2.cvtColor(small, cv2.COLOR_BGR2GRAY)
-            sharp = sharpness(gray)
-            bright = float(gray.mean())
-            motion = 0.0 if self.prev_small is None else float(cv2.absdiff(gray, self.prev_small).mean())
-            self.prev_small = gray
-            boxes = localize_text(gray, self.cfg.loc)["boxes"]
+            st = analyse(frame, self.prev_small, cc, self.cfg.loc)
+            self.prev_small = st.small_gray
+            ring.push(frame, st.sharpness)
+            self.stable = self.stable + 1 if st.ready else 0
 
-            ready = sharp > cc.sharpness_threshold and motion < cc.motion_threshold and len(boxes) >= cc.min_text_boxes
-            self.stable = self.stable + 1 if ready else 0
+            # hanya 'buram'/'jauh' yang menghalangi: jangan menunggu selamanya
+            if st.kind in ("blur", "far") and st.motion < cc.motion_threshold:
+                self.soft_since = self.soft_since or time.time()
+            else:
+                self.soft_since = None
+            force = self.soft_since is not None and time.time() - self.soft_since > cc.force_after_s
 
             if self.auto and not self.processing and time.time() > self.cooldown_until:
-                if bright < cc.dark_threshold:
-                    self.guide("Cahaya terlalu gelap. Pindah ke tempat yang lebih terang.")
-                elif len(boxes) < cc.min_text_boxes:
-                    self.guide("Teks belum terdeteksi. Arahkan sisi kemasan yang bertulisan ke kamera.")
-                elif sharp <= cc.sharpness_threshold:
-                    self.guide("Gambar buram. Jauhkan sedikit kemasan dan tahan stabil.")
-                if self.stable >= cc.stable_frames:
-                    self.stable = 0
-                    self._process_async(frame.copy())
+                if st.hint:
+                    self.guide(st.hint)
+                if self.stable >= cc.stable_frames or force:
+                    self._capture(ring)
 
             # tampilan untuk pendamping / pengembang
-            vis = draw_boxes(small, boxes)
-            status = f"tajam={sharp:.0f} gerak={motion:.1f} terang={bright:.0f} blok={len(boxes)} " \
-                     f"auto={'ON' if self.auto else 'OFF'}{' | MEMPROSES' if self.processing else ''}"
+            disp_w = 640
+            vis, ds = resize_to_width(frame, disp_w)
+            k = ds / st.scale
+            vis = draw_boxes(vis, [TextBox(int(b.x * k), int(b.y * k), int(b.w * k), int(b.h * k)) for b in st.boxes])
+            status = (f"tajam={st.sharpness:.0f} gerak={st.motion:.1f} terang={st.brightness:.0f} blok={st.n_boxes} "
+                      f"lebar={st.cluster_frac*100:.0f}% auto={'ON' if self.auto else 'OFF'}"
+                      f"{' | MEMPROSES' if self.processing else ''}")
             cv2.rectangle(vis, (0, 0), (vis.shape[1], 24), (0, 0, 0), -1)
-            cv2.putText(vis, status, (6, 17), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 255), 1, cv2.LINE_AA)
+            cv2.putText(vis, status, (6, 17), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 255, 255), 1, cv2.LINE_AA)
+            cv2.putText(vis, "SIAP" if st.ready else (st.hint or ""), (6, vis.shape[0] - 8),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0) if st.ready else (0, 0, 255), 1, cv2.LINE_AA)
             if self.args.record is not None:
                 self.args.record.write(cv2.resize(vis, (640, 480)))
             if self.args.no_window:
@@ -165,7 +179,7 @@ class CameraReader:
             if key in (ord("q"), 27):
                 break
             if key == ord(" ") and not self.processing:
-                self._process_async(frame.copy())
+                self._capture(ring)
             elif key == ord("r") and self.last_result:
                 self.spk.say(self.last_result.speech, interrupt=True)
             elif key == ord("f") and self.last_result:
@@ -199,6 +213,8 @@ def main():
     ap.add_argument("--tesseract-cmd", help="path tesseract.exe (Windows)")
     ap.add_argument("--fast", action="store_true", help="mode cepat: bilateral filter + lebar 1280 px")
     ap.add_argument("--no-window", action="store_true", help="mode kamera/video tanpa jendela tampilan")
+    ap.add_argument("--width", type=int, help="lebar resolusi kamera yang diminta (default 1920)")
+    ap.add_argument("--height", type=int, help="tinggi resolusi kamera yang diminta (default 1080)")
     ap.add_argument("--record", help="rekam tampilan mode kamera ke file .mp4 (untuk video demo)")
     args = ap.parse_args()
 

@@ -57,6 +57,7 @@ class ProductInfo:
     warnings: list[str] = field(default_factory=list)
     registration: str = ""
     netto: str = ""
+    expiry_confident: bool = True      # False = bacaan tanggal tidak terverifikasi (lihat verify.py)
 
     @property
     def expired(self) -> bool | None:
@@ -138,6 +139,9 @@ PACK_RE = re.compile(r"^\s*(?:\d+\s+)?(?:tablet|kaplet|kapsul|sachet|sirup|strip
 NETTO_RE = re.compile(r"(netto|neto|berat\s+bersih|isi\s+bersih|isi|net\s*wt)\s*[:.]?\s*(\d+(?:[.,]\d+)?\s*(?:g|gr|gram|kg|ml|mL|l|liter|tablet|kaplet|kapsul|sachet)\b)", re.I)
 
 
+COMPANY_RE = re.compile(r"\b(PT|CV|TBK|PHARMA|FARMA|INDUSTRI|LABORATORI(?:UM|ES)|DIPRODUKSI|DIPRODUKSI\s+OLEH|MANUFACTURED|DISTRIBUT\w*|MFG)\b", re.I)
+
+
 def extract_info(ocr_lines, today: date | None = None) -> ProductInfo:
     """ocr_lines: list[OCRLine] (punya .text dan .font_h) atau list[str]."""
     today = today or date.today()
@@ -148,6 +152,8 @@ def extract_info(ocr_lines, today: date | None = None) -> ProductInfo:
     # Nama produk: baris dengan huruf terbesar (kotak tertinggi) yang berisi kata
     cands = [(h, t) for t, h in zip(texts, heights)
              if sum(c.isalpha() for c in t) >= 3 and not re.search(EXP_KEYS, t, re.I)]
+    non_company = [c for c in cands if not COMPANY_RE.search(c[1])]
+    cands = non_company or cands        # hindari nama perusahaan/produsen sebagai nama produk
     if cands:
         if any(h for h, _ in cands):
             info.product_name = max(cands, key=lambda x: x[0])[1]
@@ -189,7 +195,11 @@ def build_speech(info: ProductInfo, full_text: str = "", mode: str = "ringkas") 
         parts.append(f"Produk: {info.product_name}.")
     if info.strengths:
         parts.append("Kandungan: " + ", ".join(info.strengths) + ".")
-    if info.expiry_date:
+    if info.expiry_date and not info.expiry_confident:
+        # Jangan menyatakan aman maupun kedaluwarsa bila bacaan tanggal tidak pasti.
+        parts.append(f"Tanggal kedaluwarsa kurang jelas, mungkin {format_date_id(info.expiry_date)}. "
+                     "Mohon ulangi atau minta bantuan.")
+    elif info.expiry_date:
         tgl = format_date_id(info.expiry_date)
         if info.expired:
             parts.append(f"Peringatan! Produk sudah kedaluwarsa sejak {tgl}. Jangan digunakan.")
